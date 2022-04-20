@@ -34,10 +34,10 @@ public class Serijska extends Thread {
     public Serijska(MonitorSerijska mon) {
         SerialPort[] niz=SerialPort.getCommPorts();
         
-        System.out.println(Arrays.toString(niz));
-        Scanner sc=new Scanner(System.in);
-       int izbor=sc.nextInt();
-        serial = niz[izbor];
+      //  System.out.println(Arrays.toString(niz));
+     //   Scanner sc=new Scanner(System.in);
+     //  int izbor=sc.nextInt();
+        serial = niz[0];
         
         serial.setComPortParameters(9600, 8, SerialPort.ONE_STOP_BIT, SerialPort.NO_PARITY);
         in = serial.getInputStream();
