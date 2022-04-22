@@ -24,7 +24,7 @@ public class ConsumerRPI extends Thread implements Consumeri{
     }
     
      @Override  
-    public void obradi(String b){
+    public void obradi(byte[] b){
         //TODO smisli parsiranje ovog niza
     }
     

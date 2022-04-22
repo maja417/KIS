@@ -33,10 +33,7 @@ public class Serijska extends Thread {
 
     public Serijska(MonitorSerijska mon) {
         SerialPort[] niz=SerialPort.getCommPorts();
-        
-      //  System.out.println(Arrays.toString(niz));
-     //   Scanner sc=new Scanner(System.in);
-     //  int izbor=sc.nextInt();
+
         serial = niz[0];
         
         serial.setComPortParameters(9600, 8, SerialPort.ONE_STOP_BIT, SerialPort.NO_PARITY);
@@ -58,19 +55,19 @@ public class Serijska extends Thread {
                 boolean kraj=false;
                 byte[] buffer = new byte[1];
                 byte[] poruka=null;
-               // byte[] poruka=new byte[20];
-                
-                int d=0;
-                
-                int fl=0;
+
            while(true){   
-               //System.out.println("");
+               start=0;
+               /**
+                *Ovaj if ispod je ako se iskljuci predajnik sa porta
+                *i ponovo ukljuci da se aplikacija nastavi
+                */
+               if(!serial.isOpen()){
+                   while(!serial.openPort());
+               }
                 while (serial.bytesAvailable() > 0) {
                     serial.readBytes(buffer, 1);
-                  //  System.out.print(String.format("%02x",buffer[0]));
-                   // poruka[d]=buffer[0];
-                   //// fl=1;
-                   // d++;
+
                    if (buffer[0] == 0x01 && begin) {
                         start++;
                         if (start == 3) {
@@ -79,46 +76,38 @@ public class Serijska extends Thread {
                             datalen=true;
                           
                         }
-                    }else{
-                    if(datalen){
-                        len=buffer[0];
-                        fl=1;
-                        poruka=new byte[len];
-                        datalen=false;
                     }
-                    else{
-                    if(i<len){
-                        poruka[i]=buffer[0];
-                        i++;
-                    }else{
-                    if(i==len) 
-                    { kraj=true;}
-                    
-                    if (buffer[0] == 0x0B && kraj) {
-                        end++;
-                    }
-                    if (buffer[0] == 0x13 && end == 1 && kraj) {
-                        end = 0;
-                        i=0;
-                        m.put(new String(poruka,0,len));
-                        kraj=false;
-                        len=-1;
-                        begin = true;
-                        
-                    }
-                 }}
+                   else{
+                            if(datalen){
+                                len=buffer[0];
+                                poruka=new byte[len];
+                                datalen=false;
+                            }
+                            else{
+                                if(i<len){
+                                    poruka[i]=buffer[0];
+                                    i++;
+                                }
+                                else{
+                                    if(i==len)
+                                        kraj=true;
+
+                                    if (buffer[0] == 0x0B && kraj) {
+                                        end++;
+                                    }
+                                    if (buffer[0] == 0x13 && end == 1 && kraj) {
+                                        end = 0;
+                                        i=0;
+                                        m.put(poruka);
+                                        kraj=false;
+                                        len=-1;
+                                        begin = true;
+                                    }
+                                }
+                            }
                    }
                 }
-              /*  if(poruka!=null)
-                {//String p=new String(poruka,0,len);
-                    System.out.print("Added: ");
-                for (int j=0;j<8;j++)
-                    System.out.print(String.format("%02x",poruka[j]));
-                    System.out.println("");
-                }    // len=-1;
-                */
                 poruka=null;
-                   // System.out.print(new String(poruka,0,len));    
            }
         
         }

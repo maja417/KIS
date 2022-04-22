@@ -22,7 +22,7 @@ public class DApp {
        // MonitorRPI monitorrpi= new MonitorRPI();
              
           
-         Serijska s=new Serijska(monitorS);
+        Serijska s=new Serijska(monitorS);
         s.start();
         
        // RPIComm rpi=new RPIComm(port,monitorrpi);
@@ -30,7 +30,8 @@ public class DApp {
         
        // ConsumerRPI korisnikrpi=new ConsumerRPI(monitorrpi);
       //  korisnikrpi.start();
-        for(int k=0;k<2;k++) {
+
+        for(int k=0;k<1;k++) {
              new ConsumerSerijski(monitorS,k).start();
         }
         

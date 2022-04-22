@@ -13,7 +13,7 @@ import java.util.logging.Logger;
  * @author Marija
  */
 public class ConsumerSerijski extends Thread implements Consumeri{
-MonitorSerijska monitor;
+    MonitorSerijska monitor;
 
     public ConsumerSerijski(MonitorSerijska monitor, int i) {
         super("Consumer"+i);
@@ -30,36 +30,27 @@ MonitorSerijska monitor;
     }
     
      @Override   
-    public void obradi(String b){
-       //  System.out.println(currentThread().getName());
-                  /*      int i;
-       
-        byte[] dest= new byte[3];
-        byte[] poruka=null;
+    public void obradi(byte[] b){
+    try {
+        int i;
+        byte destinacija;
+        byte[] poruka = new byte[b[3]];
         byte id;
         byte pnam;
-        for(i=0;i<b.length;i++)
-        {
-            dest[i]=b[i];
-            if(i==3)
-            {  
-                id=b[i];
-            }
-            
-            if(i==4)
-            {  
-                pnam=b[i];
-            }
-            if(i>4)
-            poruka[i]=b[i];
+        destinacija = b[0];
+        id = b[1];
+        pnam = b[2];
+        int h;
+        for (i = 4, h = 0; i < b.length; i++, h++) {
+            poruka[h] = b[i];
         }
+      //TODO: salji po adresi destinacija poruku odnosno po protokolu http na odg port web aplikacije
+
+    }
+    catch(Exception e){
+        System.out.println("odbacena poruka :(");
+    }
         
-        
-        
-      
-         System.out.println(new String(poruka,0,i));
-        
-        */
         
         
         

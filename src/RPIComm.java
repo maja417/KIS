@@ -40,7 +40,8 @@ public class RPIComm extends Thread {
                 while(ix < buf.length) {
                     ix += dis.read(buf, ix, buf.length - ix);
                 }
-                monitor.put(new String(buf, "UTF-8"));
+                monitor.put(buf);
+               // monitor.put(new String(buf, "UTF-8"));
               
             }
         } catch (IOException ex) {

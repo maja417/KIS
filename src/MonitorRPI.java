@@ -15,14 +15,14 @@ import java.util.logging.Logger;
  * @author Marija
  */
 public class MonitorRPI implements Monitor{
-    List<String> bafer;
+    List<byte[]> bafer;
 
     public MonitorRPI() {
         bafer=new LinkedList<>();
     }
     
     @Override
-    public synchronized void put(String line){
+    public synchronized void put(byte[] line){
         
             bafer.add(line);
             //if(bafer.size()==1)
@@ -30,7 +30,7 @@ public class MonitorRPI implements Monitor{
            
        }
     @Override
-    public synchronized String get(){
+    public synchronized byte[] get(){
             while(bafer.isEmpty()){
                 try {
                     wait();
