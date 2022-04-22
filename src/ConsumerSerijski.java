@@ -15,20 +15,23 @@ import java.util.logging.Logger;
 public class ConsumerSerijski extends Thread implements Consumeri{
 MonitorSerijska monitor;
 
-    public ConsumerSerijski(MonitorSerijska monitor) {
+    public ConsumerSerijski(MonitorSerijska monitor, int i) {
+        super("Consumer"+i);
         this.monitor = monitor;
     }
 
 
     @Override
     public void run() {
-            System.out.print("Consumer");
-            obradi(monitor.get());
+
+        while(true) {
+           obradi(monitor.get());
         }
+    }
     
      @Override   
-    public void obradi(byte[] b){
-          System.out.print("Consumer");
+    public void obradi(String b){
+       //  System.out.println(currentThread().getName());
                   /*      int i;
        
         byte[] dest= new byte[3];

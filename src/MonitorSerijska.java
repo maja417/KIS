@@ -13,7 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
     
 public class MonitorSerijska implements Monitor {
-    List<byte[]> bafer;
+    List<String> bafer;
 
     public MonitorSerijska() {
         bafer=new LinkedList<>();
@@ -21,16 +21,20 @@ public class MonitorSerijska implements Monitor {
     
     @Override
     public synchronized void put(String line){
-        
-            bafer.add(Base64.decode(line));
+        byte[] poruka=line.getBytes();
+        System.out.print("Added: ");
+        for (int j=0;j<8;j++)
+            System.out.print(String.format("%02x",poruka[j]));
+        System.out.println("");
+            bafer.add(line);
             //if(bafer.size()==1)
                 notifyAll();
            
        }
 
     @Override
-    public synchronized byte[] get(){
-            System.out.print("Consumerpj");
+    public synchronized String get(){
+
             while(bafer.isEmpty()){
                 try {
                     wait();
@@ -38,7 +42,13 @@ public class MonitorSerijska implements Monitor {
                     Logger.getLogger(MonitorSerijska.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            System.out.println(Arrays.toString(bafer.get(0)));
+            byte[] poruka=bafer.get(0).getBytes();
+        System.out.print(Thread.currentThread().getName()+" removed: ");
+        for (int j=0;j<8;j++)
+             System.out.print(String.format("%02x",poruka[j]));
+        System.out.println("");
+
+
             return bafer.remove(0);
     
     }

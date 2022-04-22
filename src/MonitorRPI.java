@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  * @author Marija
  */
 public class MonitorRPI implements Monitor{
-    List<byte[]> bafer;
+    List<String> bafer;
 
     public MonitorRPI() {
         bafer=new LinkedList<>();
@@ -24,13 +24,13 @@ public class MonitorRPI implements Monitor{
     @Override
     public synchronized void put(String line){
         
-            bafer.add(Base64.decode(line));
+            bafer.add(line);
             //if(bafer.size()==1)
             notify();
            
        }
     @Override
-    public synchronized byte[] get(){
+    public synchronized String get(){
             while(bafer.isEmpty()){
                 try {
                     wait();

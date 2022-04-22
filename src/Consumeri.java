@@ -10,5 +10,5 @@
  */
 public interface Consumeri {
     
-     void obradi(byte[] b);
+     void obradi(String b);
 }

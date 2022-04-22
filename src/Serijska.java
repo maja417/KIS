@@ -109,13 +109,14 @@ public class Serijska extends Thread {
                  }}
                    }
                 }
-                if(poruka!=null)
+              /*  if(poruka!=null)
                 {//String p=new String(poruka,0,len);
+                    System.out.print("Added: ");
                 for (int j=0;j<8;j++)
                     System.out.print(String.format("%02x",poruka[j]));
                     System.out.println("");
                 }    // len=-1;
-                
+                */
                 poruka=null;
                    // System.out.print(new String(poruka,0,len));    
            }
