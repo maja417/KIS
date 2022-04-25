@@ -25,7 +25,25 @@ public class ConsumerRPI extends Thread implements Consumeri{
     
      @Override  
     public void obradi(byte[] b){
-        //TODO smisli parsiranje ovog niza
+         try {
+             int i;
+             byte destinacija;
+             byte[] poruka = new byte[b[3]];
+             byte id;
+             byte pnam;
+             destinacija = b[0];
+             id = b[1];
+             pnam = b[2];
+             int h;
+             for (i = 4, h = 0; i < b.length; i++, h++) {
+                 poruka[h] = b[i];
+             }
+             //TODO: salji po adresi destinacija poruku odnosno po protokolu http na odg port web aplikacije
+
+         }
+         catch(Exception e){
+             System.out.println("odbacena poruka :(");
+         }
     }
     
     

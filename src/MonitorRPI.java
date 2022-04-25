@@ -14,30 +14,47 @@ import java.util.logging.Logger;
  *
  * @author Marija
  */
-public class MonitorRPI implements Monitor{
+public class MonitorRPI implements Monitor {
     List<byte[]> bafer;
 
     public MonitorRPI() {
-        bafer=new LinkedList<>();
+        bafer = new LinkedList<>();
     }
-    
+
     @Override
-    public synchronized void put(byte[] line){
-        
-            bafer.add(line);
-            //if(bafer.size()==1)
-            notify();
-           
-       }
+    public synchronized void put(byte[] line) {
+
+        /******************ISPIS*****************************/
+
+        System.out.print("Added: ");
+        for (int j = 0; j < line.length; j++)
+            System.out.print(String.format("%02x", line[j]));
+        System.out.println("");
+        /******************ISPIS*****************************/
+        bafer.add(line);
+        notify();
+
+    }
+
     @Override
-    public synchronized byte[] get(){
-            while(bafer.isEmpty()){
-                try {
-                    wait();
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(MonitorRPI.class.getName()).log(Level.SEVERE, null, ex);
-                }
+    public synchronized byte[] get() {
+        while (bafer.isEmpty()) {
+            try {
+                wait();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(MonitorSerijska.class.getName()).log(Level.SEVERE, null, ex);
             }
-            return bafer.remove(0);
-    } 
+        }
+        /******************ISPIS*****************************/
+        byte[] poruka = bafer.get(0);
+        System.out.print(Thread.currentThread().getName() + " removed: ");
+        for (int j = 0; j < poruka.length; j++)
+            System.out.print(String.format("%02x", poruka[j]));
+        System.out.println("");
+        /******************ISPIS*****************************/
+
+
+        return bafer.remove(0);
+
+    }
 }
