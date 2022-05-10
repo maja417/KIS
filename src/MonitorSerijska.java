@@ -35,7 +35,6 @@ public class MonitorSerijska implements Monitor {
         /******************ISPIS*****************************/
             bafer.add(poruka);
                 notifyAll();
-           
        }
 
     @Override
@@ -44,6 +43,7 @@ public class MonitorSerijska implements Monitor {
             while(bafer.isEmpty()){
                 try {
                     wait();
+
                 } catch (InterruptedException ex) {
                     Logger.getLogger(MonitorSerijska.class.getName()).log(Level.SEVERE, null, ex);
                 }
