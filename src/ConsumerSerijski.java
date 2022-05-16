@@ -68,6 +68,28 @@ public class ConsumerSerijski extends Thread implements Consumeri{
         }
 
 
+        if(id==0x02)
+        {
+
+            Poruka=poruka.toString();
+            System.out.println("Poruka:  "+Poruka);
+        }
+
+
+        if(id==0x01 && pnam==0x01)
+        {
+            for(i=0;i<4;i++)
+                nizX[i]=poruka[i];
+
+            for(i=4;i<8;i++)
+                nizY[i-4]=poruka[i];
+
+            x= ByteBuffer.wrap(nizX).order(ByteOrder.LITTLE_ENDIAN).getFloat();
+            y= ByteBuffer.wrap(nizY).order(ByteOrder.LITTLE_ENDIAN).getFloat();
+
+            System.out.println("X: "+x);
+            System.out.println("Y: "+y);
+        }
       //TODO: salji po adresi destinacija poruku odnosno po protokolu http na odg port web aplikacije
 
 
