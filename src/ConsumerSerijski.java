@@ -16,10 +16,12 @@ import java.util.logging.Logger;
  */
 public class ConsumerSerijski extends Thread implements Consumeri{
     MonitorSerijska monitor;
+    WebAppCommunication webAppCommunication;
 
-    public ConsumerSerijski(MonitorSerijska monitor, int i) {
+    public ConsumerSerijski(MonitorSerijska monitor, int i,WebAppCommunication webAppCommunication) {
         super("Consumer"+i);
         this.monitor = monitor;
+        this.webAppCommunication=webAppCommunication;
     }
 
 
@@ -31,16 +33,6 @@ public class ConsumerSerijski extends Thread implements Consumeri{
 
         }
     }
-
-    public void AndroidHTTP(String poruka)
-    {
-
-
-
-
-
-    }
-
      @Override   
     public void obradi(byte[] b){
     try {
@@ -73,12 +65,17 @@ public class ConsumerSerijski extends Thread implements Consumeri{
 
             PorukaAndroid=poruka.toString();
             System.out.println("Poruka:  "+PorukaAndroid);
+            webAppCommunication.sendAndroid(PorukaAndroid);
+
         }
         // RPi
         if(id==0x03)
         {
             PorukaRPi=poruka.toString();
             System.out.println("Poruka:  "+PorukaRPi);
+            webAppCommunication.sendRPI(PorukaRPi);
+
+
 
         }
         // koordinate
@@ -95,8 +92,10 @@ public class ConsumerSerijski extends Thread implements Consumeri{
 
             System.out.println("X: "+x);
             System.out.println("Y: "+y);
+            webAppCommunication.sendGPS(""+x,""+y);
+
         }
-      //TODO: salji po adresi destinacija poruku odnosno po protokolu http na odg port web aplikacije
+
 
 
 

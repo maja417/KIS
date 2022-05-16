@@ -16,12 +16,12 @@ public class DApp {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
-        
-        MonitorSerijska monitorS=new MonitorSerijska();
+        int kapacitet=50;
+        MonitorSerijska monitorS=new MonitorSerijska(kapacitet);
         
        // MonitorRPI monitorrpi= new MonitorRPI();
              
-          
+          WebAppCommunication wa=new WebAppCommunication();
         Serijska s=new Serijska(monitorS);
         s.start();
         
@@ -32,7 +32,7 @@ public class DApp {
       //  korisnikrpi.start();
 
         for(int k=0;k<5;k++) {
-             new ConsumerSerijski(monitorS,k).start();
+             new ConsumerSerijski(monitorS,k,wa).start();
         }
         
     }

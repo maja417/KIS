@@ -4,9 +4,6 @@
  * and open the template in the editor.
  */
 
-import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
-import com.sun.org.apache.xerces.internal.xs.datatypes.ByteList;
-import com.sun.xml.internal.ws.util.ByteArrayBuffer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,9 +14,13 @@ import java.util.logging.Logger;
     
 public class MonitorSerijska implements Monitor {
     List<byte[]> bafer;
+    int capacity;
 
 
-    public MonitorSerijska() {
+    public MonitorSerijska(int capacity) {
+
+        this.capacity=capacity;
+
         bafer=new LinkedList<>();
     }
     
@@ -33,6 +34,13 @@ public class MonitorSerijska implements Monitor {
                         System.out.print(String.format("%02x",poruka[j]));
                     System.out.println("");
         /******************ISPIS*****************************/
+        while(bafer.size()==capacity){
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
             bafer.add(poruka);
                 notifyAll();
        }
