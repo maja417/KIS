@@ -57,7 +57,7 @@ public class ConsumerSerijski extends Thread implements Consumeri{
         float x;
         float y;
 
-        String Poruka;
+        String PorukaAndroid, PorukaRPi;
 
         destinacija = b[0];
         id = b[1];
@@ -67,15 +67,21 @@ public class ConsumerSerijski extends Thread implements Consumeri{
             poruka[h] = b[i];
         }
 
-
+        // Android
         if(id==0x02)
         {
 
-            Poruka=poruka.toString();
-            System.out.println("Poruka:  "+Poruka);
+            PorukaAndroid=poruka.toString();
+            System.out.println("Poruka:  "+PorukaAndroid);
         }
+        // RPi
+        if(id==0x03)
+        {
+            PorukaRPi=poruka.toString();
+            System.out.println("Poruka:  "+PorukaRPi);
 
-
+        }
+        // koordinate
         if(id==0x01 && pnam==0x01)
         {
             for(i=0;i<4;i++)
