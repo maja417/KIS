@@ -66,33 +66,7 @@ public class ConsumerSerijski extends Thread implements Consumeri{
         for (i = 4, h = 0; i < b.length; i++, h++) {
             poruka[h] = b[i];
         }
-<<<<<<< HEAD
 
-        if(id==0x02)
-        {
-
-            Poruka=poruka.toString();
-            System.out.println("Poruka:  "+Poruka);
-        }
-
-        
-        if(id==0x01 && pnam==0x01)
-        {
-            for(i=0;i<4;i++)
-                nizX[i]=poruka[i];
-
-            for(i=4;i<8;i++)
-                nizY[i-4]=poruka[i];
-
-            x= ByteBuffer.wrap(nizX).order(ByteOrder.LITTLE_ENDIAN).getFloat();
-            y= ByteBuffer.wrap(nizY).order(ByteOrder.LITTLE_ENDIAN).getFloat();
-
-            System.out.println("X: "+x);
-            System.out.println("Y: "+y);
-        }
-=======
-        Poruka message=new Poruka(destinacija,id,pnam,poruka);
->>>>>>> 240342cb595f8a86facd5993e0a5784e2ee52750
 
       //TODO: salji po adresi destinacija poruku odnosno po protokolu http na odg port web aplikacije
 
@@ -103,14 +77,7 @@ public class ConsumerSerijski extends Thread implements Consumeri{
     catch(Exception e){
         System.out.println("odbacena poruka :(");
     }
-<<<<<<< HEAD
-        
 
-        
-        
-        
-=======
->>>>>>> 240342cb595f8a86facd5993e0a5784e2ee52750
     }
     
 }
