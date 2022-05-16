@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,6 +28,7 @@ public class ConsumerSerijski extends Thread implements Consumeri{
 
         while(true) {
            obradi(monitor.get());
+
         }
     }
 
@@ -47,6 +50,15 @@ public class ConsumerSerijski extends Thread implements Consumeri{
         byte[] poruka = new byte[b[3]];
         byte id;
         byte pnam;
+
+        byte[] nizX=new byte[4];
+        byte[] nizY=new byte[4];
+
+        float x;
+        float y;
+
+        String Poruka;
+
         destinacija = b[0];
         id = b[1];
         pnam = b[2];
@@ -54,7 +66,7 @@ public class ConsumerSerijski extends Thread implements Consumeri{
         for (i = 4, h = 0; i < b.length; i++, h++) {
             poruka[h] = b[i];
         }
-        Poruka message=new Poruka(destinacija,id,pnam,poruka);
+
 
       //TODO: salji po adresi destinacija poruku odnosno po protokolu http na odg port web aplikacije
 
@@ -65,6 +77,7 @@ public class ConsumerSerijski extends Thread implements Consumeri{
     catch(Exception e){
         System.out.println("odbacena poruka :(");
     }
+
     }
     
 }
