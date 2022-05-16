@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,6 +28,7 @@ public class ConsumerSerijski extends Thread implements Consumeri{
 
         while(true) {
            obradi(monitor.get());
+
         }
     }
     
@@ -37,6 +40,15 @@ public class ConsumerSerijski extends Thread implements Consumeri{
         byte[] poruka = new byte[b[3]];
         byte id;
         byte pnam;
+
+        byte[] nizX=new byte[4];
+        byte[] nizY=new byte[4];
+
+        float x;
+        float y;
+
+        String Poruka;
+
         destinacija = b[0];
         id = b[1];
         pnam = b[2];
@@ -44,6 +56,30 @@ public class ConsumerSerijski extends Thread implements Consumeri{
         for (i = 4, h = 0; i < b.length; i++, h++) {
             poruka[h] = b[i];
         }
+
+        if(id==0x02)
+        {
+
+            Poruka=poruka.toString();
+            System.out.println("Poruka:  "+Poruka);
+        }
+
+        
+        if(id==0x01 && pnam==0x01)
+        {
+            for(i=0;i<4;i++)
+                nizX[i]=poruka[i];
+
+            for(i=4;i<8;i++)
+                nizY[i-4]=poruka[i];
+
+            x= ByteBuffer.wrap(nizX).order(ByteOrder.LITTLE_ENDIAN).getFloat();
+            y= ByteBuffer.wrap(nizY).order(ByteOrder.LITTLE_ENDIAN).getFloat();
+
+            System.out.println("X: "+x);
+            System.out.println("Y: "+y);
+        }
+
       //TODO: salji po adresi destinacija poruku odnosno po protokolu http na odg port web aplikacije
 
     }
@@ -51,7 +87,7 @@ public class ConsumerSerijski extends Thread implements Consumeri{
         System.out.println("odbacena poruka :(");
     }
         
-        
+
         
         
         

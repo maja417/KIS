@@ -31,7 +31,7 @@ public class DApp {
        // ConsumerRPI korisnikrpi=new ConsumerRPI(monitorrpi);
       //  korisnikrpi.start();
 
-        for(int k=0;k<1;k++) {
+        for(int k=0;k<5;k++) {
              new ConsumerSerijski(monitorS,k).start();
         }
         
