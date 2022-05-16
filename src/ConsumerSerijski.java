@@ -31,10 +31,20 @@ public class ConsumerSerijski extends Thread implements Consumeri{
 
         }
     }
-    
+
+    public void AndroidHTTP(String poruka)
+    {
+
+
+
+
+
+    }
+
      @Override   
     public void obradi(byte[] b){
     try {
+
         int i;
         byte destinacija;
         byte[] poruka = new byte[b[3]];
@@ -56,6 +66,7 @@ public class ConsumerSerijski extends Thread implements Consumeri{
         for (i = 4, h = 0; i < b.length; i++, h++) {
             poruka[h] = b[i];
         }
+<<<<<<< HEAD
 
         if(id==0x02)
         {
@@ -79,18 +90,27 @@ public class ConsumerSerijski extends Thread implements Consumeri{
             System.out.println("X: "+x);
             System.out.println("Y: "+y);
         }
+=======
+        Poruka message=new Poruka(destinacija,id,pnam,poruka);
+>>>>>>> 240342cb595f8a86facd5993e0a5784e2ee52750
 
       //TODO: salji po adresi destinacija poruku odnosno po protokolu http na odg port web aplikacije
+
+
+
 
     }
     catch(Exception e){
         System.out.println("odbacena poruka :(");
     }
+<<<<<<< HEAD
         
 
         
         
         
+=======
+>>>>>>> 240342cb595f8a86facd5993e0a5784e2ee52750
     }
     
 }
