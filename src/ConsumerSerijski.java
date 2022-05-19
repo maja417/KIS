@@ -46,6 +46,8 @@ public class ConsumerSerijski extends Thread implements Consumeri{
         byte[] nizX=new byte[4];
         byte[] nizY=new byte[4];
 
+        byte[] temperatura= new byte[3];
+
         float x;
         float y;
 
@@ -79,7 +81,7 @@ public class ConsumerSerijski extends Thread implements Consumeri{
 
         }
         // koordinate
-        if(id==0x01 && pnam==0x00)
+        if(destinacija==0x30)
         {
             for(i=0;i<4;i++)
                 nizX[i]=poruka[i];
@@ -95,6 +97,17 @@ public class ConsumerSerijski extends Thread implements Consumeri{
             webAppCommunication.sendGPS(x, y);
 
         }
+
+        // temperatura
+        if(destinacija==0x25)
+        {
+            for(i=0;i<3;i++)
+            {
+                temperatura[i]=poruka[i];
+            }
+            System.out.println("Temperatura: "+temperatura.toString());
+        }
+
 
     }
     catch(Exception e){
