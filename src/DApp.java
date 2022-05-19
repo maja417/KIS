@@ -17,13 +17,19 @@ public class DApp {
 
     public static void main(String[] args) throws IOException {
         int kapacitet = 50;
+
         MonitorSerijska monitorS = new MonitorSerijska(kapacitet);
 
         // MonitorRPI monitorrpi= new MonitorRPI();
 
         WebAppCommunication wa = new WebAppCommunication();
-        Serijska s = new Serijska(monitorS);
+        Serijska s = new Serijska(monitorS,0);
         s.start();
+        /*
+
+        Serijska s1 = new Serijska(monitorS,1);
+        s1.start();
+        */
 
         // RPIComm rpi=new RPIComm(port,monitorrpi);
         //  rpi.start();

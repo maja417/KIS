@@ -15,7 +15,7 @@ public class WebAppCommunication {
                 .build();
 
         MediaType mediaType = MediaType.parse("application/json");
-        RequestBody body = RequestBody.create(mediaType, "{\r\n    \"x\": \""+s+"\",\r\n    \"y\": \"4.44\"\r\n}");
+        RequestBody body = RequestBody.create(mediaType, "{\r\n    \"x\": \""+s+"\"\r\n}");
         Request request = new Request.Builder()
                 .url("http://localhost:8080/gps")
                 .method("POST", body)
@@ -24,17 +24,17 @@ public class WebAppCommunication {
         try {
             client.newCall(request).execute();
         }  catch (IOException | NoSuchMethodError e) {
-            System.out.println("evo me :(");
+            System.out.println("evo me :)");
         }
 
     }
 
 
     public void sendRPI(String s){
-      /* this.client.newBuilder()
+       this.client.newBuilder()
                 .build();
         MediaType mediaType = MediaType.parse("application/json");
-        RequestBody body = RequestBody.create(mediaType, "{\r\n    \"x\": \"3.54\",\r\n    \"y\": \"4.44\"\r\n}");
+        RequestBody body = RequestBody.create(mediaType, "{\r\n    \"x\": \""+s+"\"\r\n}");
         Request request = new Request.Builder()
                 .url("http://localhost:8080/gps")
                 .method("POST", body)
@@ -43,8 +43,8 @@ public class WebAppCommunication {
         try {
             client.newCall(request).execute();
          }  catch (IOException | NoSuchMethodError e) {
-            System.out.println("evo me :(");
-        }*/
+            System.out.println("evo me :)");
+        }
     }
 
 
@@ -62,7 +62,7 @@ public class WebAppCommunication {
         try (Response response = client.newCall(request).execute()) {
             System.out.println(response.body().string());
         }  catch (IOException | NoSuchMethodError e) {
-            System.out.println("evo me :(");
+            System.out.println("evo me :)");
         }
 
     }
@@ -72,7 +72,7 @@ public class WebAppCommunication {
         this.client.newBuilder()
                 .build();
         MediaType mediaType = MediaType.parse("application/json");
-        RequestBody body = RequestBody.create(mediaType, "{\r\n    \"x\": \"3.54\",\r\n    \"y\": \"4.44\"\r\n}");
+        RequestBody body = RequestBody.create(mediaType, "{\r\n    \"x\": \""+s+"\"\r\n}");
         Request request = new Request.Builder()
                 .url("http://localhost:8080/gps")
                 .method("POST", body)
@@ -81,7 +81,7 @@ public class WebAppCommunication {
         try (Response response = client.newCall(request).execute()) {
             System.out.println(response.body().string());
         }  catch (IOException | NoSuchMethodError e) {
-            System.out.println("evo me :(");
+            System.out.println("evo me :)");
         }
     }
 

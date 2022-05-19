@@ -16,12 +16,14 @@ public class Serijska extends Thread {
     private SerialPort serial;
     private InputStream in;
     private MonitorSerijska m;
+    int id;
 
-    public Serijska(MonitorSerijska mon) {
+    public Serijska(MonitorSerijska mon,int id) {
         SerialPort[] niz=SerialPort.getCommPorts();
+        this.id=id;
         System.out.println(niz[0]);
 
-        serial = niz[0];
+        serial = niz[id];
         
         serial.setComPortParameters(9600, 8, SerialPort.ONE_STOP_BIT, SerialPort.NO_PARITY);
         in = serial.getInputStream();
