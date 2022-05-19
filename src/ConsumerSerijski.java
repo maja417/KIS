@@ -79,7 +79,7 @@ public class ConsumerSerijski extends Thread implements Consumeri{
 
         }
         // koordinate
-        if(id==0x01 && pnam==0x01)
+        if(id==0x01 && pnam==0x00)
         {
             for(i=0;i<4;i++)
                 nizX[i]=poruka[i];
@@ -87,18 +87,14 @@ public class ConsumerSerijski extends Thread implements Consumeri{
             for(i=4;i<8;i++)
                 nizY[i-4]=poruka[i];
 
-            x= ByteBuffer.wrap(nizX).order(ByteOrder.LITTLE_ENDIAN).getFloat();
-            y= ByteBuffer.wrap(nizY).order(ByteOrder.LITTLE_ENDIAN).getFloat();
+            x= ByteBuffer.wrap(nizX).order(ByteOrder.BIG_ENDIAN).getFloat();
+            y= ByteBuffer.wrap(nizY).order(ByteOrder.BIG_ENDIAN).getFloat();
 
             System.out.println("X: "+x);
             System.out.println("Y: "+y);
-            webAppCommunication.sendGPS(""+x,""+y);
+            webAppCommunication.sendGPS(x, y);
 
         }
-
-
-
-
 
     }
     catch(Exception e){

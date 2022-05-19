@@ -19,6 +19,7 @@ public class Serijska extends Thread {
 
     public Serijska(MonitorSerijska mon) {
         SerialPort[] niz=SerialPort.getCommPorts();
+        System.out.println(niz[0]);
 
         serial = niz[0];
         

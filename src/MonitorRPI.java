@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 
-import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
