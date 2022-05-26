@@ -1,7 +1,6 @@
 import okhttp3.*;
 
 import java.io.IOException;
-
 public class WebAppCommunication {
     OkHttpClient client;
 
@@ -15,16 +14,16 @@ public class WebAppCommunication {
                 .build();
 
         MediaType mediaType = MediaType.parse("application/json");
-        RequestBody body = RequestBody.create(mediaType, "{\r\n    \"x\": \""+s+"\"\r\n}");
+        RequestBody body = RequestBody.create(mediaType, "{\"valuee\":\""+s+"\"}");
         Request request = new Request.Builder()
-                .url("http://localhost:8080/gps")
+                .url("http://kisic.kis2022.com:10/API/values")
                 .method("POST", body)
                 .addHeader("Content-Type", "application/json")
                 .build();
-        try {
-            client.newCall(request).execute();
+        try (Response response = client.newCall(request).execute()) {
+
         }  catch (IOException | NoSuchMethodError e) {
-            System.out.println("evo me :)");
+            System.out.println(e.getMessage());
         }
 
     }
@@ -55,14 +54,14 @@ public class WebAppCommunication {
 
         RequestBody body = RequestBody.create(mediaType, "{\r\n    \"x\": \""+x+"\",\r\n    \"y\": \""+y+"\"\r\n}");
         Request request = new Request.Builder()
-                .url("http://localhost:8080/gps")
+                .url("http://kisic.kis2022.com:10/API/values")
                 .method("POST", body)
                 .addHeader("Content-Type", "application/json")
                 .build();
         try (Response response = client.newCall(request).execute()) {
             System.out.println(response.body().string());
         }  catch (IOException | NoSuchMethodError e) {
-            System.out.println("evo me :)");
+            System.out.println(e.getMessage());
         }
 
     }

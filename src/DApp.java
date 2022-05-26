@@ -18,12 +18,23 @@ public class DApp {
     public static void main(String[] args) throws IOException {
         int kapacitet = 50;
 
-        MonitorSerijska monitorS = new MonitorSerijska(kapacitet);
+    //    MonitorSerijska monitorS = new MonitorSerijska(kapacitet);
 
         // MonitorRPI monitorrpi= new MonitorRPI();
 
         WebAppCommunication wa = new WebAppCommunication();
-        Serijska s = new Serijska(monitorS,0);
+        for(int i=1;i<10;i++) {
+            wa.sendAndroid("caos"+i);
+
+            // wa.sendAndroid("caos");
+         ////   wa.sendAndroid("caos");
+          //  wa.sendAndroid("caos");
+        }
+
+
+
+
+      /*  Serijska s = new Serijska(monitorS,0);
         s.start();
         /*
 
@@ -37,9 +48,9 @@ public class DApp {
         // ConsumerRPI korisnikrpi=new ConsumerRPI(monitorrpi);
         //  korisnikrpi.start();
 
-        for (int k = 0; k < 5; k++) {
+      /*  for (int k = 0; k < 5; k++) {
             new ConsumerSerijski(monitorS, k, wa).start();
-        }
+        }*/
     }
 
 
