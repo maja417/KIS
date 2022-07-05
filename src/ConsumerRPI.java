@@ -10,9 +10,11 @@
  */
 public class ConsumerRPI extends Thread implements Consumeri{
     MonitorRPI monitor;
+    WebAppCommunication wa;
 
-    public ConsumerRPI(MonitorRPI monitor) {
+    public ConsumerRPI(MonitorRPI monitor,WebAppCommunication wa) {
         this.monitor = monitor;
+        this.wa=wa;
     }
 
 
@@ -38,7 +40,7 @@ public class ConsumerRPI extends Thread implements Consumeri{
              for (i = 4, h = 0; i < b.length; i++, h++) {
                  poruka[h] = b[i];
              }
-             //TODO: salji po adresi destinacija poruku odnosno po protokolu http na odg port web aplikacije
+           wa.sendRPI(poruka.toString());
 
          }
          catch(Exception e){
